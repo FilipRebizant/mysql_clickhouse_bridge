@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  php-fpm:
+    image: php:fpm-alpine
+    volumes:
+      - ./:/var/www/html:cached
+
+  nginx:
+    image: nginx:stable
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./:/var/www/html
+    ports:
+      - "80:80"
+
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ips2019
+      MYSQL_USER: ips2019
+      MYSQL_PASSWORD: ips2019
+    ports:
+      - "3306:3306"
+
+volumes:
+  mysql:
