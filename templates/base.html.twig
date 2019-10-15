@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}MySQL-Clickhouse Bridge{% endblock %}</title>
@@ -7,6 +7,7 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+        {% include 'partials/navbar.html.twig' %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
