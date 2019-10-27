@@ -19,6 +19,8 @@ services:
       container_name: mariadb
       image: mariadb:latest
       restart: always
+      volumes:
+            - ./db:/dbdump
       environment:
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: ips2019
