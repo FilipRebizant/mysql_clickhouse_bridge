@@ -20,3 +20,8 @@
   - testy do: 02.12.2019
   - przygotowanie dokumentacji do: 09.12.2019
   - prezentacja projektu, rozliczenie, zaliczenia: 16.12.2019 
+  
+### Dokumentacja
+
+Diagram komponentów
+![diagram komponentów](documentation/uml/components.png)
