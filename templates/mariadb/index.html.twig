@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center my-5">MariaDB items</h1>
+        <nav>
+            <ul class="pagination justify-content-center">
+                {% for i in 1..10 %}
+                    <li class="page-item {% if i == currentPage %} active {% endif %} ">
+                        <a class="page-link" href="{{ path('mariadb', {page: i}) }}">{{ i }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>City</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                    <tr>
+                        <td>{{ row['id'] }}</td>
+                        <td>{{ row['Name'] }}</td>
+                        <td>{{ row['Age'] }}</td>
+                        <td>{{ row['City'] }}</td>
+                        <td>
+                            <a href="" class="btn btn-primary">Edit</a>
+                            <a href="" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

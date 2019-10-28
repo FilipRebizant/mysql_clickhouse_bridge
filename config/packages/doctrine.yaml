@@ -10,8 +10,10 @@ doctrine:
                 default_table_options:
                     charset: utf8mb4
                     collate: utf8mb4_unicode_ci
-
-                url: '%env(resolve:DATABASE_URL)%'
+                host: 'mariadb'
+                user: 'ips2019'
+                password: 'ips2019'
+                dbname: 'ips2019'
             clickhouse:
                 host:     localhost
                 port:     8123
