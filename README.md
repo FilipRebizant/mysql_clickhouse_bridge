@@ -24,7 +24,7 @@
 ### Dokumentacja
 
 #### Diagram komponentów
-![diagram_komponentów](documentation/uml/components.png)
+![diagram_komponentów](documentation/uml/components.JPG)
 
 #### Diagram klas
-![diagram_klas](documentation/uml/class.png)
+![diagram_klas](documentation/uml/class.JPG)
