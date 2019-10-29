@@ -25,3 +25,6 @@
 
 Diagram komponentów
 ![diagram komponentów](documentation/uml/components.png)
+
+Diagram klas
+![diagram klas](documentation/uml/class.png)
