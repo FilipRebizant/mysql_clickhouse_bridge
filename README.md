@@ -25,12 +25,12 @@
 
 #### Diagram komponentów
 
-![diagram_komponentów](documentation/uml/components.JPG)
+![components](documentation/uml/components.JPG)
 
 #### Diagram klas
 
-![diagram_klas](documentation/uml/class.JPG)
+![class](documentation/uml/class.JPG)
 
 #### Diagram przepływu informacji
 
-![diagram_klas](documentation/uml/communication.JPG)
+![communication](documentation/uml/communication.jpg)
