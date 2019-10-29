@@ -33,8 +33,12 @@
                         <td>{{ row['Age'] }}</td>
                         <td>{{ row['City'] }}</td>
                         <td>
-                            <a href="" class="btn btn-primary">Edit</a>
-                            <a href="" class="btn btn-danger">Delete</a>
+                            <form action="{{ path('loadMariaDBEditView', {id: row['id'], page: currentPage}) }}">
+                                <button class="btn btn-primary">Edit</button>
+                            </form>
+                            <form action="{{ path('mariaDBDeleteRow', {id: row['id'], page: currentPage}) }}" method="post">
+                                <button class="btn btn-danger" type="submit">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 {% endfor %}
