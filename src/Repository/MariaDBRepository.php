@@ -45,6 +45,25 @@ class MariaDBRepository extends AbstractRepository
     }
 
     /**
+     * @param array $data
+     * @return int
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function edit(array $data): int
+    {
+        $query = "
+        UPDATE $this->tableName 
+        SET 
+          $this->tableName.id = '$data[id]',
+          $this->tableName.Age = $data[age],
+          $this->tableName.City = '$data[city]',
+          $this->tableName.Name = '$data[name]'
+        WHERE id = $data[id]";
+
+        return $this->mariaDBConnection->executeUpdate($query);
+    }
+
+    /**
      * @param int $id
      * @throws \Doctrine\DBAL\DBALException
      */

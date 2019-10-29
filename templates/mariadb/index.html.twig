@@ -4,6 +4,12 @@
 
 {% block body %}
     <div class="container">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-5">
+                {{ message }}
+            </div>
+        {% endfor %}
+
         <h1 class="text-center my-5">MariaDB items</h1>
         <nav>
             <ul class="pagination justify-content-center">
@@ -34,6 +40,7 @@
                         <td>{{ row['City'] }}</td>
                         <td>
                             <form action="{{ path('loadMariaDBEditView', {id: row['id'], page: currentPage}) }}">
+                                <input type="hidden" name="page" value="{{ currentPage }}">
                                 <button class="btn btn-primary">Edit</button>
                             </form>
                             <form action="{{ path('mariaDBDeleteRow', {id: row['id'], page: currentPage}) }}" method="post">

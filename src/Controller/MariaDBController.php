@@ -39,10 +39,13 @@ class MariaDBController extends AbstractController
     {
         $id = $request->get('id');
         $arr = $this->mariaDBRepository->fetch($id);
+
         return $this->render('mariadb/edit.html.twig', [
             'id' => $arr['id'],
             'name' => $arr['Name'],
             'age' => $arr['Age'],
+            'city' => $arr['City'],
+            'page' => $request->get('page'),
         ]);
     }
 
@@ -52,6 +55,10 @@ class MariaDBController extends AbstractController
     public function editData(Request $request): Response
     {
         $page = $request->get('page');
+        $this->mariaDBRepository->edit($request->request->all());
+
+        $this->addFlash('success', 'Data Changed successfully');
+
         return $this->redirectToRoute('mariadb', ['page' => $page]);
     }
 
@@ -63,6 +70,8 @@ class MariaDBController extends AbstractController
         $id = $request->get('id');
         $page = $request->get('page');
         $this->mariaDBRepository->delete($id);
+
+        $this->addFlash('success', 'Row Removed successfully');
 
         return $this->redirectToRoute('mariadb', ['page' => $page]);
     }
