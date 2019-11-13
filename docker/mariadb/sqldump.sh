@@ -1,1 +1,0 @@
-mysql -u ips2019 -p ips2019 < test.sql

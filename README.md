@@ -15,7 +15,7 @@
     
 #### Wgranie bazy danych:
     docker-compose exec mariadb bash
-    mysql -u ips2019 -p ips2019 < dbdump/test.sql
+    mysql -u ips2019 -p ips2019 < dbdump/createDatabase.sql
     lub mysql -u ips2019 -p ips2019 < dbdump/one_million_database.sql
     haslo: ips2019
 
