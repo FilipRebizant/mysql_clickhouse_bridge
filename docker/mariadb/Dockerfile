@@ -13,7 +13,7 @@ ENV MYSQL_USER ips2019
 ENV MYSQL_PASSWORD ips2019
 
 # Upload dummy data
-ADD ["./sql/createDatabase.sql", "/usr/sql/createDatabase.sql"]
+#ADD ["./sql/smallSet.sql", "/usr/sql/smallSet.sql"]
 
 # PORT
 EXPOSE 3306
