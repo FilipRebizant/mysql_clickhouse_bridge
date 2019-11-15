@@ -18,9 +18,10 @@ services:
 
   mariadb:
       container_name: mariadb
-      build:
-        context: ./docker/mariadb
+      image: mariadb:10.4
       restart: always
+      volumes:
+        - ./docker/mariadb/sql:/docker-entrypoint-initdb.d
       environment:
         MYSQL_ROOT_PASSWORD: test123
         MYSQL_DATABASE: ips2019
