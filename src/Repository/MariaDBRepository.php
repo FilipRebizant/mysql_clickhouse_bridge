@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use Doctrine\DBAL\Connection;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class MariaDBRepository extends AbstractRepository
 {
@@ -13,9 +12,9 @@ class MariaDBRepository extends AbstractRepository
     /** @var string  */
     private $tableName = 'MainTable';
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(Connection $connection)
     {
-        $this->mariaDBConnection = $container->get('doctrine.dbal.mariadb_connection');
+        $this->mariaDBConnection = $connection;
     }
 
     /**

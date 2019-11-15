@@ -7,10 +7,10 @@ ADD ["./gatewaymy.cnf", "/etc/mysql/conf.d/conf_mysql.cnf"]
 ADD sql/createDatabase.sql /docker-entrypoint-initdb.d
 
 # Set variables
-ENV MYSQL_ROOT_PASSWORD test123
-ENV MYSQL_DATABASE ips2019
-ENV MYSQL_USER ips2019
-ENV MYSQL_PASSWORD ips2019
+ENV MYSQL_ROOT_PASSWORD=test123
+ENV MYSQL_DATABASE=ips2019
+ENV MYSQL_USER=ips2019
+ENV MYSQL_PASSWORD=ips2019
 
 # Upload dummy data
 #ADD ["./sql/smallSet.sql", "/usr/sql/smallSet.sql"]

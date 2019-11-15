@@ -28,14 +28,17 @@ services:
         MYSQL_PASSWORD: ips2019
       ports:
         - "3306:3306"
+      expose:
+        - '3306'
 
-  clickhouse:
-      container_name: clickhouse
-      image: yandex/clickhouse-server
-      ports:
-        - "8123:8123"
-        - "9000:9000"
+#  clickhouse:
+#      container_name: clickhouse
+#      image: yandex/clickhouse-server
+#      ports:
+#        - "8123:8123"
+#        - "9000:9000"
 
 volumes:
   mariadb:
-  clickhouse:
+    driver: local
+#  clickhouse:
