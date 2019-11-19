@@ -86,13 +86,14 @@ class MariaDBRepository extends AbstractRepository
         return $columns;
     }
 
-    public function getDataFromTables(array $tables)
+    public function getDataFromTables(string $tables, int $page)
     {
-        $tableNames = implode(', ', $tables);
-
-        $query = "
-            SELECT $tableNames FROM $this->tableName
-        ";
+        $queryLimit = 500;
+        $offset = (($page - 1 ) * $queryLimit) > 0 ? ($page - 1 ) * $queryLimit : 0;
+        $query = "SELECT $tables
+                  FROM $this->tableName 
+                  LIMIT $queryLimit 
+                  OFFSET $offset";
 
         return $this->mariaDBConnection->fetchAll($query);
     }

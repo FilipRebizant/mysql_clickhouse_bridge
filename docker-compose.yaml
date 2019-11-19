@@ -22,6 +22,7 @@ services:
       restart: always
       volumes:
         - ./docker/mariadb/sql:/docker-entrypoint-initdb.d
+        - ./sql:/sql_dump
       environment:
         MYSQL_ROOT_PASSWORD: test123
         MYSQL_DATABASE: ips2019
@@ -33,9 +34,9 @@ services:
         - '3306'
         - '3305'
 
-#  clickhouse:
-#      container_name: clickhouse
-#      image: yandex/clickhouse-server
-#      ports:
-#        - "8123:8123"
-#        - "9000:9000"
+  clickhouse:
+      container_name: clickhouse
+      image: yandex/clickhouse-server
+      ports:
+        - "8123:8123"
+        - "9000:9000"

@@ -1,4 +1,4 @@
-($(document).ready(function () {
+$(document).ready(function () {
     var expanded = false;
     function showCheckboxes() {
         var checkboxes = document.getElementById("checkboxes");
@@ -11,4 +11,4 @@
         }
     }
     $('.selectBox').click(showCheckboxes);
-}))();
+});

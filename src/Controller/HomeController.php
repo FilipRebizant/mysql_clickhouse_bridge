@@ -36,10 +36,16 @@ class HomeController extends AbstractController
      */
     public function copyData(Request $request): JsonResponse
     {
-        $columnNames = $request->get('columns');
-        $result = $this->mariaDBRepository->getDataFromTables($columnNames);
+        $data = json_decode($request->getContent(), true);
+        if ($data['from'] === 'mariaDB') {
+            $result = $this->mariaDBRepository->getDataFromTables($data['columns'], $data['counter']);
+        }
+
         // TODO: Przekazać pobrane wiersze do Clickhouse'a
 
-        return new JsonResponse(['rows' => $result]);
+        return new JsonResponse([
+            'rows' => $result,
+//            'numberOfRows' => count($result),
+        ]);
     }
 }
