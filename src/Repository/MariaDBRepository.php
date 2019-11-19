@@ -90,9 +90,6 @@ class MariaDBRepository extends AbstractRepository
     {
         $tableNames = implode(', ', $tables);
 
-//        var_dump($tableNames);
-//        var_dump($this->getColumnNames());
-//        die;
         $query = "
             SELECT $tableNames FROM $this->tableName
         ";
