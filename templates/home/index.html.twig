@@ -6,5 +6,47 @@
 
 <div class="container">
     <h1>Home Page</h1>
+    <!-- TODO: Ostylować tą stronę-->
+
+
+    <div class="col-4">
+        <h4>Basic multi-select</h4>
+        <select class="custom-select" id="basic" multiple="multiple">
+            <option value="cheese">Cheese</option>
+            <option value="tomatoes">Tomatoes</option>
+            <option value="mozarella">Mozzarella</option>
+            <option value="mushrooms">Mushrooms</option>
+            <option value="pepperoni">Pepperoni</option>
+            <option value="onions">Onions</option>
+        </select>
+    </div>
+    <form action="{{ path('copyData') }}" method="post">
+        <select name="columns[]">
+            {% for columnName in columns %}
+                <option value="{{ columnName }}">{{ columnName }}</option>
+            {% endfor %}
+        </select>
+        <button class="btn btn-outline-primary">Send</button>
+    </form>
+    <!-- TODO: Stworzyć selecta i wrzucić tam nazwy tabel-->
 </div>
+    <script>
+        $('#basic').multiselect({
+            templates: {
+                li: '<li><a href="javascript:void(0);"><label class="pl-2"></label></a></li>'
+            }
+        });
+
+        $('#no_checkboxes').multiselect({
+            templates: {
+                li: '<li><a href="javascript:void(0);"><label class="pl-2"></label></a></li>'
+            },
+            nonSelectedText: 'Choose...',
+            selectedClass: 'bg-light',
+            onInitialized: function(select, container) {
+                // hide checkboxes
+                container.find('input').addClass('d-none');
+            }
+        });
+    </script>
 {% endblock %}

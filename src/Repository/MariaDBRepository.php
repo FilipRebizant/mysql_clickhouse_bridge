@@ -74,4 +74,29 @@ class MariaDBRepository extends AbstractRepository
 
         $this->mariaDBConnection->query($query);
     }
+
+    public function getColumnNames()
+    {
+        $query = "SHOW COLUMNS FROM $this->tableName";
+        $columns = [];
+        foreach ($this->mariaDBConnection->fetchAll($query) as $column) {
+          $columns[] = $column['Field'];
+        };
+
+        return $columns;
+    }
+
+    public function getDataFromTables(array $tables)
+    {
+        $tableNames = implode(', ', $tables);
+
+//        var_dump($tableNames);
+//        var_dump($this->getColumnNames());
+//        die;
+        $query = "
+            SELECT $tableNames FROM $this->tableName
+        ";
+
+        return $this->mariaDBConnection->fetchAll($query);
+    }
 }
