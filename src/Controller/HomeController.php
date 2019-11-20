@@ -39,6 +39,8 @@ class HomeController extends AbstractController
         $data = json_decode($request->getContent(), true);
         if ($data['from'] === 'mariaDB') {
             $result = $this->mariaDBRepository->getDataFromTables($data['columns'], $data['counter']);
+
+//            $this->mariaDBRepository->
         }
 
         // TODO: Przekazać pobrane wiersze do Clickhouse'a

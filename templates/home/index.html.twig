@@ -5,12 +5,10 @@
 {% block body %}
 
 <div class="container">
-    <h1>Home Page</h1>
+    <h1 class="my-3 text-center">MariaDB - Clickhouse Bridge</h1>
     <!-- TODO: Ostylować tą stronę-->
 
-    <div class="alert alert-success hide">
-        Done
-    </div>
+    <div class="alert alert-success hide"></div>
 
     <form id="form" action="{{ path('copyData') }}" method="post">
         <div class="multiselect">
@@ -37,49 +35,12 @@
     <div class="package-wrapper">
 
     </div>
+    <div class="result"></div>
 </div>
 
 
 {% endblock %}
 
 {% block javascripts %}
-    <script>
-        $('#form').submit(function (e) {
-            e.preventDefault();
-            var selections = '';
-            document.querySelectorAll('input[type=checkbox]').forEach(function(item) {
-                if (item.checked) {
-                    selections = selections + item.value + ',';
-                }
-            });
-
-            // Todo:: Rozpoczęcie mierzenia czasu
-            var url = $(this).attr('action');
-            var i = 1;
-            check_condition(i);
-            function check_condition(i) {
-               $.ajax({
-                  url: url,
-                  method: 'post',
-                  data: JSON.stringify({
-                      'columns': selections.substr(0, selections.length-1),
-                      'from': 'mariaDB',
-                      'counter': i
-                  })
-              }).done(function (result) {
-                  console.log(result);
-                   if(result.rows.length) {
-                       setTimeout(check_condition, 50, i);
-                   } else {
-                       $('.alert-success').fadeIn();
-
-                       // TODO:: Zakończenie mierzenia czasu
-                   }
-              });
-
-               i++;
-            }
-
-        });
-    </script>
+    <script src="{{ asset('js/dataTransferHelper.js') }}"></script>
 {% endblock %}

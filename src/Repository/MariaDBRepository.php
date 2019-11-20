@@ -43,6 +43,13 @@ class MariaDBRepository extends AbstractRepository
         return $this->mariaDBConnection->fetchAssoc($query);
     }
 
+    public function insert($tables, $data)
+    {
+        $query = "INSERT INTO $this->tableName ($tables) VALUES ($data)";
+//        $this->mariaDBConnection->prepare($query);
+
+    }
+
     /**
      * @param array $data
      * @return int
