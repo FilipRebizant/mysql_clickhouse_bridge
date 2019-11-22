@@ -40,3 +40,17 @@ services:
       ports:
         - "8123:8123"
         - "9000:9000"
+
+  phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      container_name: phpmyadmin-bridge
+      restart: always
+      depends_on:
+        - mariadb
+      ports:
+        - "30002:80"
+      environment:
+        PMA_HOST: mariadb
+        MYSQL_ROOT_PASSWORD: 'ips2019'
+      volumes:
+        - /sessions
