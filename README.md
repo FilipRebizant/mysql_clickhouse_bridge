@@ -13,11 +13,15 @@
     docker-compose exec <nazwa kontenera> bash
     np docker-compose exec php-fpm bash
     
-#### Wgranie bazy danych:
+#### Wgranie bazy danych (mariadb):
     docker-compose exec mariadb bash
     mysql -u ips2019 -p ips2019 < dbdump/createDatabase.sql
     lub mysql -u ips2019 -p ips2019 < dbdump/one_million_database.sql
     haslo: ips2019
+
+#### Wgranie bazy danych (clickhouse):
+    docker-compose exec clickhouse bash
+    clickhouse-client -d ips2019  < dbdump/createDatabase.sql
 
 ### Terminarz
   - opracowanie założeń i wymagań do: 28.10.2019
