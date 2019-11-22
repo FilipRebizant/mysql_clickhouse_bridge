@@ -37,6 +37,8 @@ services:
   clickhouse:
       container_name: clickhouse
       image: yandex/clickhouse-server
+      volumes:
+        - ./docker/clickhouse/sql:/docker-entrypoint-initdb.d
       ports:
         - "8123:8123"
         - "9000:9000"
