@@ -14,7 +14,7 @@ class HomeController extends AbstractController
     /** @var MariaDBRepository  */
     private $mariaDBRepository;
 
-    public function __construct(MariaDBRepository $mariaDBRepository)
+    public function __construct(MariaDBRepository $mariaDBRepository) // TODO:: Dodać repozytorium clickhouse
     {
         $this->mariaDBRepository = $mariaDBRepository;
     }
@@ -22,7 +22,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index()
+    public function index(): Response
     {
         $columns = $this->mariaDBRepository->getColumnNames();
 
@@ -38,16 +38,23 @@ class HomeController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
         if ($data['from'] === 'mariaDB') {
-            $result = $this->mariaDBRepository->getDataFromTables($data['columns'], $data['counter']);
+            $rows = $this->mariaDBRepository->getDataFromTables($data['columns'], $data['counter']);
 
-//            $this->mariaDBRepository->
+            foreach ($rows as $row) {
+                // TODO: Przekazać pobrane wiersze do Clickhouse'a
+            }
         }
 
-        // TODO: Przekazać pobrane wiersze do Clickhouse'a
+//        if ($data['from' === 'clickhouse']) {
+//            $rows = []; // TODO:: Wyciągnąć dane z clickhouse
+//            foreach ($rows as $row) {
+//                 $this->mariaDBRepository->insert($row); // TODO:: Sprawdzić czy dodawanie działa
+//            }
+//        }
 
         return new JsonResponse([
-            'rows' => $result,
-//            'numberOfRows' => count($result),
+            'rows' => $rows,
+            'numberOfRows' => count($rows),
         ]);
     }
 }

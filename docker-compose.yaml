@@ -21,7 +21,7 @@ services:
       image: mariadb:10.4
       restart: always
       volumes:
-        - ./docker/mariadb/sql:/docker-entrypoint-initdb.d
+        - ./sql/createDatabase:/docker-entrypoint-initdb.d
         - ./sql:/sql_dump
       environment:
         MYSQL_ROOT_PASSWORD: test123

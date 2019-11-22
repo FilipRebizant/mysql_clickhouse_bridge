@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\MariaDBRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -74,5 +75,18 @@ class MariaDBController extends AbstractController
         $this->addFlash('success', 'Row Removed successfully');
 
         return $this->redirectToRoute('mariadb', ['page' => $page]);
+    }
+
+    /**
+     * @Route("/mariaDB_number_of_rows/", name="mariaDBShowNumberOfRows", methods={"POST"})
+     */
+    public function showRowsNumber(Request $request): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+        $rows = $this->mariaDBRepository->getRowsCount($data['columns']);
+
+        return new JsonResponse([
+            'result' => $rows
+        ], 200);
     }
 }

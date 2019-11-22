@@ -43,11 +43,9 @@ class MariaDBRepository extends AbstractRepository
         return $this->mariaDBConnection->fetchAssoc($query);
     }
 
-    public function insert($tables, $data)
+    public function insert($data)
     {
-        $query = "INSERT INTO $this->tableName ($tables) VALUES ($data)";
-//        $this->mariaDBConnection->prepare($query);
-
+        $this->mariaDBConnection->insert($this->tableName, $data);
     }
 
     /**
@@ -91,6 +89,14 @@ class MariaDBRepository extends AbstractRepository
         };
 
         return $columns;
+    }
+
+    public function getRowsCount($columns)
+    {
+        $columns = explode(',', $columns);
+        $query = "SELECT COUNT($columns[0]) as 'numberOfRows' FROM $this->tableName";
+
+        return $this->mariaDBConnection->fetchAssoc($query);
     }
 
     public function getDataFromTables(string $tables, int $page)
