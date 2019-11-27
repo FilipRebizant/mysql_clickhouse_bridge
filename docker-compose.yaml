@@ -8,6 +8,7 @@ services:
     volumes:
       - ./:/var/www/html:cached
 
+
   nginx:
     image: nginx:stable
     volumes:
@@ -38,8 +39,8 @@ services:
       container_name: clickhouse
       image: yandex/clickhouse-server
       ports:
-        - "8123:8123"
-        - "9000:9000"
+        - "8234:8234"
+        - "9001:9001"
 
   phpmyadmin:
       image: phpmyadmin/phpmyadmin
