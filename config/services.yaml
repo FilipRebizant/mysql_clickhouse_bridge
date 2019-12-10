@@ -22,3 +22,8 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+
+    doctrine:
+        class: Doctrine\DBAL\Connection
+        factory_class:  'App\Repository\'
+        factory_method: 'fetchAll'

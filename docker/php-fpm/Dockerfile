@@ -9,5 +9,6 @@ RUN apt-get update && \
 COPY ./composer.json /var/www/html
 COPY ./composer.lock /var/www/html
 RUN composer install
+RUN composer require friendsofdoctrine/dbal-clickhouse
 
 USER docker
