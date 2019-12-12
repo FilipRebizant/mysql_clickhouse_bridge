@@ -14,10 +14,10 @@
 * [Schematy UML](#schematy-uml)
 * [Wykorzystane technologie](#wykorzystane-technologie)
 
-#### Opis aplikacji
+### Opis aplikacji
 Celem aplikacji jest tworzenie kopii danych pomiędzy systemami bazodanowymi MySQL i ClickHouse. Aplikacja przetwarza dane o sporych rozmiarach, typu big-data.
 
-#### Instalacja
+### Instalacja
     docker-compose build
 #### Uruchomienie aplikacji
     docker-compose up -d
@@ -33,6 +33,17 @@ Celem aplikacji jest tworzenie kopii danych pomiędzy systemami bazodanowymi MyS
     mysql -u ips2019 -p ips2019 < dbdump/createDatabase.sql
     lub mysql -u ips2019 -p ips2019 < dbdump/one_million_database.sql
     haslo: ips2019
+  
+### Schematy UML
+- Diagram komponentów
+![diagram komponentów](documentation/uml/components.png)
+
+### Wykorzystane technologie
+- MySQL
+- ClickHouse
+- Symfony
+- Doctrine DBAL ClickHouse Driver
+- NginX
 
 ### Terminarz
   - opracowanie założeń i wymagań do: 28.10.2019
@@ -41,14 +52,3 @@ Celem aplikacji jest tworzenie kopii danych pomiędzy systemami bazodanowymi MyS
   - testy do: 02.12.2019
   - przygotowanie dokumentacji do: 09.12.2019
   - prezentacja projektu, rozliczenie, zaliczenia: 16.12.2019 
-  
-### Dokumentacja
-#### Schematy UML
-- Diagram komponentów
-![diagram komponentów](documentation/uml/components.png)
-
-### Wykorzystane technologie
-- MySQl
-- ClickHouse
-- Symfony
-- Doctrine DBAL ClickHouse Driver
