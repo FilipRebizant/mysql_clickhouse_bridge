@@ -1,6 +1,6 @@
-# Mysql to Clickhouse Bridge
+# MySQL to ClickHouse Bridge
 
-### Aplikacja umożliwiająca kopiowanie danych pomiędzy baza mysql oraz clickhouse.
+### Aplikacja umożliwiająca kopiowanie danych pomiędzy bazami MariaDB i ClickHouse.
 
 ### Autorzy
 - Filip Rebizant
@@ -15,7 +15,7 @@
 * [Wykorzystane technologie](#wykorzystane-technologie)
 
 ### Opis aplikacji
-Celem aplikacji jest tworzenie kopii danych pomiędzy systemami bazodanowymi MySQL i ClickHouse. Aplikacja przetwarza dane o sporych rozmiarach, typu big-data.
+Celem aplikacji jest tworzenie kopii danych pomiędzy systemami bazodanowymi MariaDB i ClickHouse. Aplikacja przetwarza dane o sporych rozmiarach, typu big-data.
 
 ### Instalacja
     docker-compose build
@@ -39,7 +39,7 @@ Celem aplikacji jest tworzenie kopii danych pomiędzy systemami bazodanowymi MyS
 ![diagram komponentów](documentation/uml/components.png)
 
 ### Wykorzystane technologie
-- MySQL
+- MariaDB
 - ClickHouse
 - Symfony
 - Doctrine DBAL ClickHouse Driver
