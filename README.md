@@ -2,6 +2,21 @@
 
 ### Aplikacja umożliwiająca kopiowanie danych pomiędzy baza mysql oraz clickhouse.
 
+### Autorzy
+- Filip Rebizant
+- Konrad Rejman
+- Mateusz Matyaszek
+- Bartłomiej Kudełka
+
+## Spis treści
+* [Opis aplikacji](#Opis-aplikacji)
+* [Instalacja i uruchmienie aplikacji](#Instalacja)
+* [Schematy UML](#schematy-uml)
+* [Wykorzystane technologie](#wykorzystane-technologie)
+
+#### Opis aplikacji
+Celem aplikacji jest tworzenie kopii danych pomiędzy systemami bazodanowymi MySQL i ClickHouse. Aplikacja przetwarza dane o sporych rozmiarach, typu big-data.
+
 #### Instalacja
     docker-compose build
 #### Uruchomienie aplikacji
@@ -21,13 +36,19 @@
 
 ### Terminarz
   - opracowanie założeń i wymagań do: 28.10.2019
-  - opracowanie wstępnej dokumentacji do: 04.11.2019
+  - opcowanie wstępnej dokumentacji do: 04.11.2019
   - implementacja do: 25.11.2019
   - testy do: 02.12.2019
   - przygotowanie dokumentacji do: 09.12.2019
   - prezentacja projektu, rozliczenie, zaliczenia: 16.12.2019 
   
 ### Dokumentacja
-
-Diagram komponentów
+#### Schematy UML
+- Diagram komponentów
 ![diagram komponentów](documentation/uml/components.png)
+
+### Wykorzystane technologie
+- MySQl
+- ClickHouse
+- Symfony
+- Doctrine DBAL ClickHouse Driver
