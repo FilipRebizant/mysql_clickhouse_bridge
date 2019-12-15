@@ -35,13 +35,42 @@ class ClickhouseRepository extends AbstractRepository
     }
 
     /**
+     * @param int $id
+     * @return array
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function fetch(int $id): array
+    {
+        $query = "SELECT * FROM $this->tableName WHERE id = $id";
+        return $this->conn->fetchAssoc($query);
+    }
+
+    /**
      * @param array $data
      * @throws \Doctrine\DBAL\DBALException
      */
     public function insert(array $data)
     {
-//        $this->conn->insert('new_table', ['id' => 2, 'payload' => 'dummyPayload2']);
         $this->conn->insert($this->tableName, $data);
+    }
+
+    /**
+     * @param array $data
+     * @return int
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function edit(array $data): int
+    {
+        $query = "
+        UPDATE $this->tableName 
+        SET 
+          $this->tableName.id = '$data[id]',
+          $this->tableName.Age = $data[age],
+          $this->tableName.City = '$data[city]',
+          $this->tableName.Name = '$data[name]'
+        WHERE id = $data[id]";
+
+        return $this->conn->executeUpdate($query);
     }
 
     public function getRowsCount(): array

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ClickhouseRepository;
 use App\Repository\MariaDBRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -14,9 +15,15 @@ class HomeController extends AbstractController
     /** @var MariaDBRepository  */
     private $mariaDBRepository;
 
-    public function __construct(MariaDBRepository $mariaDBRepository) // TODO:: Dodać repozytorium clickhouse
-    {
+    /** @var ClickhouseRepository */
+    private $clickhouseRepository;
+
+    public function __construct(
+        MariaDBRepository $mariaDBRepository,
+        ClickhouseRepository $clickhouseRepository
+    ) {
         $this->mariaDBRepository = $mariaDBRepository;
+        $this->clickhouseRepository = $clickhouseRepository;
     }
 
     /**
@@ -37,20 +44,26 @@ class HomeController extends AbstractController
     public function copyData(Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
+
         if ($data['from'] === 'mariaDB') {
             $rows = $this->mariaDBRepository->getDataFromTables($data['columns'], $data['counter']);
 
             foreach ($rows as $row) {
-                // TODO: Przekazać pobrane wiersze do Clickhouse'a
+                if ($row['id']) {
+                    $row['id'] = (int) $row['id'];
+                }
+                $this->clickhouseRepository->insert($row);
             }
         }
 
-//        if ($data['from' === 'clickhouse']) {
-//            $rows = []; // TODO:: Wyciągnąć dane z clickhouse
+        if ($data['from' === 'clickhouse']) {
+            $rows = [];
+//            var_dump($rows);
+//            die;
 //            foreach ($rows as $row) {
 //                 $this->mariaDBRepository->insert($row); // TODO:: Sprawdzić czy dodawanie działa
 //            }
-//        }
+        }
 
         return new JsonResponse([
             'rows' => $rows,

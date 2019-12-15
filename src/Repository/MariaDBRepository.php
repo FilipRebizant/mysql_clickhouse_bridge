@@ -37,7 +37,7 @@ class MariaDBRepository extends AbstractRepository
      * @return array
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function fetch(int $id)
+    public function fetch(int $id): array
     {
         $query = "SELECT * FROM $this->tableName WHERE id = $id";
         return $this->mariaDBConnection->fetchAssoc($query);

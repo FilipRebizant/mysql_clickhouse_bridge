@@ -26,18 +26,14 @@ class ClickhouseController extends AbstractController
         $page = $request->get('page');
         $dataSet = $this->clickhouseRepository->fetchAll($page);
 
-        var_dump($dataSet);
-
-        return new Response();
-
-//        return $this->render('clickhouse/index.html.twig', [
-//            'rows' => $dataSet,
-//            'currentPage' => $page
-//        ]);
+        return $this->render('clickhouse/index.html.twig', [
+            'rows' => $dataSet,
+            'currentPage' => $page
+        ]);
     }
 
     /**
-     * @Route("/clickhouse/edit/{id}", name="loadclickhouseEditView", methods={"GET"})
+     * @Route("/clickhouse/edit/{id}", name="clickhouseEditView", methods={"GET"})
      */
     public function loadEditView(Request $request): Response
     {
