@@ -5,5 +5,5 @@ namespace App\Repository;
 class AbstractRepository
 {
     /** @var int  */
-    protected $queryLimit = 50;
+    protected $queryLimit = 500;
 }

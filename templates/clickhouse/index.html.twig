@@ -1,44 +1,62 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}ClickHouse Items{% endblock %}
 
 {% block body %}
     <div class="container">
-        <h1 class="text-center my-5">ClickHouse items</h1>
-        <nav>
-            <ul class="pagination justify-content-center">
-                {% for i in 1..10 %}
-                    <li class="page-item {% if i == currentPage %} active {% endif %} ">
-                        <a class="page-link" href="{{ path('clickhouse', {page: i}) }}">{{ i }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </nav>
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success text-center mt-5">
+                {{ message }}
+            </div>
+        {% endfor %}
 
-        {#<table class="table">#}
-            {#<thead class="thead-light">#}
-            {#<tr>#}
-                {#<th>ID</th>#}
-                {#<th>Name</th>#}
-                {#<th>Age</th>#}
-                {#<th>City</th>#}
-                {#<th></th>#}
-            {#</tr>#}
-            {#</thead>#}
-            {#<tbody>#}
-            {#{% for row in rows %}#}
-                {#<tr>#}
-                    {#<td>{{ row['id'] }}</td>#}
-                    {#<td>{{ row['Name'] }}</td>#}
-                    {#<td>{{ row['Age'] }}</td>#}
-                    {#<td>{{ row['City'] }}</td>#}
-                    {#<td>#}
-                        {#<a href="" class="btn btn-primary">Edit</a>#}
-                        {#<a href="" class="btn btn-danger">Delete</a>#}
-                    {#</td>#}
-                {#</tr>#}
-            {#{% endfor %}#}
-            {#</tbody>#}
-        {#</table>#}
+        <h1 class="text-center my-5">ClickHouse items</h1>
+        {% if rows|length > 0 %}
+            <nav>
+                <ul class="pagination justify-content-center">
+                    {% for i in 1..10 %}
+                        <li class="page-item {% if i == currentPage %} active {% endif %} ">
+                            <a class="page-link" href="{{ path('clickhouse', {page: i}) }}">{{ i }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+
+            <div class="d-flex justify-content-center my-3">
+                <form class="ml-3" action="{{ path('clickhouseDeleteAll') }}"  method="post">
+                    <button onclick="return confirm('This action will remove all rows from database, Are you sure you want to do this?')" class="btn btn-danger" type="submit">Clear table</button>
+                </form>
+            </div>
+        {% endif %}
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>City</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in rows %}
+                <tr>
+                    <td>{{ row['id'] }}</td>
+                    <td>{{ row['Name'] }}</td>
+                    <td>{{ row['Age'] }}</td>
+                    <td>{{ row['City'] }}</td>
+                    <td class="d-flex">
+                        <form action="{{ path('clickhouseEditView', {id: row['id'], page: currentPage}) }}">
+                            <input type="hidden" name="page" value="{{ currentPage }}">
+                            <button class="btn btn-primary">Edit</button>
+                        </form>
+                        <form class="ml-3" action="{{ path('clickhouseDeleteRow', {id: row['id'], page: currentPage}) }}" method="post">
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}

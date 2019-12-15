@@ -37,7 +37,7 @@ class MariaDBRepository extends AbstractRepository
      * @return array
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function fetch(int $id)
+    public function fetch(int $id): array
     {
         $query = "SELECT * FROM $this->tableName WHERE id = $id";
         return $this->mariaDBConnection->fetchAssoc($query);
@@ -101,11 +101,10 @@ class MariaDBRepository extends AbstractRepository
 
     public function getDataFromTables(string $tables, int $page)
     {
-        $queryLimit = 500;
-        $offset = (($page - 1 ) * $queryLimit) > 0 ? ($page - 1 ) * $queryLimit : 0;
+        $offset = (($page - 1 ) * $this->queryLimit) > 0 ? ($page - 1 ) * $this->queryLimit : 0;
         $query = "SELECT $tables
                   FROM $this->tableName 
-                  LIMIT $queryLimit 
+                  LIMIT $this->queryLimit 
                   OFFSET $offset";
 
         return $this->mariaDBConnection->fetchAll($query);

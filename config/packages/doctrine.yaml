@@ -15,7 +15,7 @@ doctrine:
                 password: 'ips2019'
                 dbname: 'ips2019'
             clickhouse:
-                host:     localhost
+                host:     clickhouse
                 port:     8123
                 user:     default
                 password: ""

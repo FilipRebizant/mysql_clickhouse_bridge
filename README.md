@@ -31,7 +31,7 @@ Celem aplikacji jest tworzenie kopii danych pomiędzy systemami bazodanowymi Mar
 #### Wgranie bazy danych:
     docker-compose exec mariadb bash
     mysql -u ips2019 -p ips2019 < dbdump/createDatabase.sql
-    lub mysql -u ips2019 -p ips2019 < dbdump/one_million_database.sql
+    lub mysql -u ips2019 -p ips2019 < sql/one_million_database.sql
     haslo: ips2019
   
 ### Schematy UML
