@@ -56,10 +56,6 @@ class ClickHouseRepository extends AbstractRepository
      */
     public function edit(array $data): int
     {
-
-//        //ALTER TABLE <table> UPDATE column1 = expr1 [, ...] WHERE <filter expression>
-//        $age = strval($data['age']);
-
         $query = "
         ALTER TABLE $this->tableName UPDATE 
           Age = $data[age],

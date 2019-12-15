@@ -25,8 +25,6 @@ class ClickhouseController extends AbstractController
     {
         $page = $request->get('page');
         $dataSet = $this->clickhouseRepository->fetchAll($page);
-//        var_dump($dataSet);
-//            die;
 
         return $this->render('clickhouse/index.html.twig', [
             'rows' => $dataSet,
