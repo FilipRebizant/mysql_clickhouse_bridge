@@ -40,21 +40,25 @@ $(document).ready(function () {
         selections = selections.substr(0, selections.length-1);
 
         if (selections) {
-            $spinner.fadeIn();
             showCheckboxes();
             $form.fadeOut();
-            textHelper.fadeIn();
-            getNumberOfRows(selections).then(function (response) {
-                progressBarWrapper.fadeIn();
+            getNumberOfRows(selections, $inputFrom.val()).then(function (response) {
                 numberOfRows = response.result.numberOfRows;
+                if (numberOfRows > 0) {
+                    textHelper.fadeIn();
+                    $spinner.fadeIn();
+                    progressBarWrapper.fadeIn();
+                    check_condition(i);
+                } else {
+                    showError('No rows found');
+                    setTimeout(function () {
+                        $form.fadeIn();
+                        hideAlert();
+                    }, 2500);
+                }
             });
-            check_condition(i);
         } else {
-            $alertWrapper.removeClass('alert-success');
-            $alertWrapper.addClass('alert-danger');
-            $alertWrapper.text('Please select at least one column');
-            $alertWrapper.fadeIn();
-            console.log('error');
+            showError('Please select at least one column');
         }
 
         function check_condition(i) {
@@ -101,14 +105,29 @@ $(document).ready(function () {
         }
     });
 
-    async function getNumberOfRows(columns)
+    async function getNumberOfRows(columns, source)
     {
         return Promise.resolve($.ajax({
-            url: 'mariaDB_number_of_rows/',
+            url: source + '_number_of_rows/',
             method: 'post',
             data: JSON.stringify({
                 'columns': columns
             })
         }));
+    }
+
+    function showError(error)
+    {
+        var $alertWrapper = $('.alert');
+
+        $alertWrapper.text(error);
+        $alertWrapper.removeClass('alert-success');
+        $alertWrapper.addClass('alert-danger');
+        $alertWrapper.fadeIn();
+    }
+
+    function hideAlert() {
+        var $alertWrapper = $('.alert');
+        $alertWrapper.fadeOut();
     }
 });

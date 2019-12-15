@@ -91,7 +91,7 @@ class ClickhouseController extends AbstractController
     }
 
     /**
-     * @Route("/clickhouse_number_of_rows/", name="clickhouseShowNumberOfRows", methods={"POST"})
+     * @Route("/clickHouse_number_of_rows/", name="clickhouseShowNumberOfRows", methods={"POST"})
      */
     public function showRowsNumber(Request $request): JsonResponse
     {
