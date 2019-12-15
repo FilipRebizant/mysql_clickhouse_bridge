@@ -14,8 +14,6 @@ class MariaDBRepository extends AbstractRepository
 
     public function __construct(Connection $connection)
     {
-
-
         $this->mariaDBConnection = $connection;
     }
 
@@ -25,35 +23,6 @@ class MariaDBRepository extends AbstractRepository
      */
     public function fetchAll(int $page): array
     {
-        $conn = $this->get('doctrine.dbal.clickhouse_connection');
-
-        // ***quick start***
-        $fromSchema = $conn->getSchemaManager()->createSchema();
-        $toSchema = clone $fromSchema;
-
-
-// create new table object
-        $newTable = $toSchema->createTable('new_table');
-
-// add columns
-        $newTable->addColumn('id', 'integer', ['unsigned' => true]);
-        $newTable->addColumn('payload', 'string', ['notnull' => false]);
-// *option 'notnull' in false mode allows you to insert NULL into the column;
-//                   in this case, the column will be represented in the ClickHouse as Nullable(String)
-        $newTable->addColumn('hash', 'string', ['length' => 32, 'fixed' => true]);
-// *option 'fixed' sets the fixed length of a string column as specified;
-//                 if specified, the type of the column is FixedString
-
-//set primary key
-        $newTable->setPrimaryKey(['id']);
-
-
-// execute migration SQLs to create table in ClickHouse
-        $sqlArray = $fromSchema->getMigrateToSql($toSchema, $conn->getDatabasePlatform());
-        foreach ($sqlArray as $sql) {
-            $conn->exec($sql);
-        }
-
         $offset = (($page - 1 ) * $this->queryLimit) > 0 ? ($page - 1 ) * $this->queryLimit : 0;
         $query = "SELECT *
                   FROM $this->tableName 

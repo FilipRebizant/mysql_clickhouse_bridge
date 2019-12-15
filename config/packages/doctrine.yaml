@@ -15,11 +15,11 @@ doctrine:
                 password: 'ips2019'
                 dbname: 'ips2019'
             clickhouse:
-                host:     localhost
+                host:     clickhouse
                 port:     8123
                 user:     default
                 password: ""
-                dbname:   'test'
+                dbname:   default
                 driver_class: FOD\DBALClickHouse\Driver
                 wrapper_class: FOD\DBALClickHouse\Connection
                 options:
