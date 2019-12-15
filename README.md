@@ -22,7 +22,7 @@ Celem aplikacji jest tworzenie kopii danych pomiędzy systemami bazodanowymi Mar
 #### Uruchomienie aplikacji
     docker-compose up -d
     
-##### Aplikacja powinna być dostępna pod adresem http://localhost
+##### Aplikacja powinna być dostępna pod adresem http://localhost:8080
 
 #### Wejście do kontenera
     docker-compose exec <nazwa kontenera> bash
