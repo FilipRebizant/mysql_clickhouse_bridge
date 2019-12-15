@@ -13,6 +13,7 @@
 * [Instalacja i uruchmienie aplikacji](#Instalacja)
 * [Schematy UML](#schematy-uml)
 * [Wykorzystane technologie](#wykorzystane-technologie)
+* [Aplikacja](#Aplikacja)
 
 ### Opis aplikacji
 Celem aplikacji jest tworzenie kopii danych pomiędzy systemami bazodanowymi MariaDB i ClickHouse. Aplikacja przetwarza dane o sporych rozmiarach, typu big-data.
@@ -45,6 +46,24 @@ Celem aplikacji jest tworzenie kopii danych pomiędzy systemami bazodanowymi Mar
 - Doctrine DBAL ClickHouse Driver
 - NginX
 
+### Aplikacja
+- Zakładka MariaDB
+![1](documentation/uml/1.png)
+![2](documentation/uml/2.png)
+![3](documentation/uml/3.png)
+- Edycja danych MariaDB
+![4](documentation/uml/4.png)
+![5](documentation/uml/5.png)
+- Usuwanie rekordu
+![6](documentation/uml/6.png)
+- Kopiowanie
+![7](documentation/uml/7.png)
+![8](documentation/uml/8.png)
+
+- ClickHouse
+![9](documentation/uml/9.png)
+![11](documentation/uml/10.png)
+![10](documentation/uml/11.png)
 ### Terminarz
   - opracowanie założeń i wymagań do: 28.10.2019
   - opcowanie wstępnej dokumentacji do: 04.11.2019
