@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Repository\ClickhouseRepository;
+use App\Repository\ClickHouseRepository;
 use App\Repository\MariaDBRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,15 +15,15 @@ class HomeController extends AbstractController
     /** @var MariaDBRepository  */
     private $mariaDBRepository;
 
-    /** @var ClickhouseRepository */
-    private $clickhouseRepository;
+    /** @var ClickHouseRepository */
+    private $clickHouseRepository;
 
     public function __construct(
         MariaDBRepository $mariaDBRepository,
-        ClickhouseRepository $clickhouseRepository
+        ClickHouseRepository $clickHouseRepository
     ) {
         $this->mariaDBRepository = $mariaDBRepository;
-        $this->clickhouseRepository = $clickhouseRepository;
+        $this->clickHouseRepository = $clickHouseRepository;
     }
 
     /**
@@ -57,19 +57,17 @@ class HomeController extends AbstractController
                     $row['Age'] = (int) $row['Age'];
                 }
 
-                $this->clickhouseRepository->insert($row);
+                $this->clickHouseRepository->insert($row);
             }
         }
 
-//        if ($data['from' === 'clickhouse']) {
-////            $rows = [];
-////            var_dump($rows);
-////            die;
-////            foreach ($rows as $row) {
-////                 $this->mariaDBRepository->insert($row); // TODO:: Sprawdzić czy dodawanie działa
-////                    $this->clickhouseRepository->delete()
-////            }
-//        }
+        if ($data['from'] === 'clickHouse') {
+            $rows = $this->clickHouseRepository->getDataFromTables($data['columns'], $data['counter']);
+
+            foreach ($rows as $row) {
+                $this->clickHouseRepository->insert($row);
+            }
+        }
 
         return new JsonResponse([
             'rows' => $rows,

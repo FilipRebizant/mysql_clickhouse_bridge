@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Repository\ClickhouseRepository;
+use App\Repository\ClickHouseRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,7 +13,7 @@ class ClickhouseController extends AbstractController
 {
     private $clickhouseRepository;
 
-    public function __construct(ClickhouseRepository $clickhouseRepository)
+    public function __construct(ClickHouseRepository $clickhouseRepository)
     {
         $this->clickhouseRepository = $clickhouseRepository;
     }

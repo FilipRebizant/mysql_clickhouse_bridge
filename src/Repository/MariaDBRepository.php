@@ -101,11 +101,10 @@ class MariaDBRepository extends AbstractRepository
 
     public function getDataFromTables(string $tables, int $page)
     {
-        $queryLimit = 500;
-        $offset = (($page - 1 ) * $queryLimit) > 0 ? ($page - 1 ) * $queryLimit : 0;
+        $offset = (($page - 1 ) * $this->queryLimit) > 0 ? ($page - 1 ) * $this->queryLimit : 0;
         $query = "SELECT $tables
                   FROM $this->tableName 
-                  LIMIT $queryLimit 
+                  LIMIT $this->queryLimit 
                   OFFSET $offset";
 
         return $this->mariaDBConnection->fetchAll($query);

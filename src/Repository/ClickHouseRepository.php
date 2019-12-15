@@ -5,7 +5,7 @@ namespace App\Repository;
 use FOD\DBALClickHouse\Connection;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class ClickhouseRepository extends AbstractRepository
+class ClickHouseRepository extends AbstractRepository
 {
     /** @var Connection */
     private $conn;
@@ -75,9 +75,12 @@ class ClickhouseRepository extends AbstractRepository
         return $this->conn->executeUpdate($query);
     }
 
-    public function getRowsCount(): array
+    public function getRowsCount($columns)
     {
-        return [];
+        $columns = explode(',', $columns);
+        $query = "SELECT COUNT($columns[0]) as 'numberOfRows' FROM $this->tableName";
+
+        return $this->conn->fetchAssoc($query);
     }
 
     /**
@@ -151,5 +154,16 @@ class ClickhouseRepository extends AbstractRepository
 //
 //        $query = "CLEAR COLUMN id IN PARTITION $this->tableName";
 //        $this->conn->query($query);
+    }
+
+    public function getDataFromTables(string $tables, int $page)
+    {
+        $offset = (($page - 1 ) * $this->queryLimit) > 0 ? ($page - 1 ) * $this->queryLimit : 0;
+        $query = "SELECT $tables
+                  FROM $this->tableName 
+                  LIMIT $this->queryLimit 
+                  OFFSET $offset";
+
+        return $this->conn->fetchAll($query);
     }
 }

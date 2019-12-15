@@ -16,22 +16,20 @@ $(document).ready(function () {
     $('#form').submit(function (e) {
         e.preventDefault();
 
+        var $form = $(this);
         var progressBar = $('#progress-bar');
         var progressBarWrapper = $('.progress');
         var textHelper = $('#text-helper');
-        var wrapper = $('.alert-success');
+        var $alertWrapper = $('.alert');
         var selections = '';
         var startedAt = new Date();
         var difference, finishedAt;
-        var url = $(this).attr('action');
+        var url = $form.attr('action');
         var i = 1;
-        var form = $(this);
         var progress;
-
-        showCheckboxes();
-
-        form.fadeOut();
-        textHelper.fadeIn();
+        var numberOfRows;
+        var $inputFrom = $form.find('#from');
+        var $spinner = $('#spinner');
 
         document.querySelectorAll('input[type=checkbox]').forEach(function(item) {
             if (item.checked) {
@@ -41,19 +39,32 @@ $(document).ready(function () {
 
         selections = selections.substr(0, selections.length-1);
 
-        var numberOfRows;
-        getNumberOfRows(selections).then(function (response) {
-            progressBarWrapper.fadeIn();
-            numberOfRows = response.result.numberOfRows;
-        });
-        check_condition(i);
+        if (selections) {
+            $spinner.fadeIn();
+            showCheckboxes();
+            $form.fadeOut();
+            textHelper.fadeIn();
+            getNumberOfRows(selections).then(function (response) {
+                progressBarWrapper.fadeIn();
+                numberOfRows = response.result.numberOfRows;
+            });
+            check_condition(i);
+        } else {
+            $alertWrapper.removeClass('alert-success');
+            $alertWrapper.addClass('alert-danger');
+            $alertWrapper.text('Please select at least one column');
+            $alertWrapper.fadeIn();
+            console.log('error');
+        }
+
         function check_condition(i) {
+            $alertWrapper.fadeOut();
             $.ajax({
                 url: url,
                 method: 'post',
                 data: JSON.stringify({
                     'columns': selections,
-                    'from': 'mariaDB',
+                    'from': $inputFrom.val(),
                     'counter': i
                 })
             }).done(function (result) {
@@ -62,18 +73,22 @@ $(document).ready(function () {
                 } else {
                     finishedAt = new Date();
                     difference = finishedAt.getTime() - startedAt.getTime();
-                    wrapper.append("Copying " + numberOfRows + " rows from columns: " + selections +  " finished in ");
-                    wrapper.append(difference / 1000 + " seconds");
+                    $alertWrapper.text('');
+                    $alertWrapper.append("Copying " + numberOfRows + " rows from columns: " + selections +  " finished in ");
+                    $alertWrapper.append(difference / 1000 + " seconds");
 
                     setTimeout(function () {
-                        wrapper.fadeIn();
-                        form.fadeIn();
+                        $alertWrapper.removeClass('alert-danger');
+                        $alertWrapper.addClass('alert-success');
+                        $alertWrapper.fadeIn();
+                        $form.fadeIn();
                         textHelper.fadeOut();
+                        $spinner.fadeOut();
                     }, 500);
                 }
 
                 if (numberOfRows) {
-                    progress = Math.round(( ((i-3)*500) / numberOfRows) * 100);
+                    progress = Math.round(( ((i-2)*500) / numberOfRows) * 100);
                     progressBar.attr('aria-valuenow', progress);
                     progressBar.css({
                         width: progress+'%',

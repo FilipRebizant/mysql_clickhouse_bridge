@@ -5,27 +5,29 @@
 {% block body %}
     <div class="container">
         {% for message in app.flashes('success') %}
-            <div class="alert text-center alert-success mt-5">
+            <div class="alert alert-success text-center mt-5">
                 {{ message }}
             </div>
         {% endfor %}
 
         <h1 class="text-center my-5">ClickHouse items</h1>
-        <nav>
-            <ul class="pagination justify-content-center">
-                {% for i in 1..10 %}
-                    <li class="page-item {% if i == currentPage %} active {% endif %} ">
-                        <a class="page-link" href="{{ path('clickhouse', {page: i}) }}">{{ i }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </nav>
-        <div class="d-flex justify-content-center my-3">
-            <form class="ml-3" action="{{ path('clickhouseDeleteAll') }}"  method="post">
-                <button onclick="return confirm('This action will remove all rows from database, Are you sure you want to do this?')" class="btn btn-danger" type="submit">Clear table</button>
-            </form>
-        </div>
+        {% if rows|length > 0 %}
+            <nav>
+                <ul class="pagination justify-content-center">
+                    {% for i in 1..10 %}
+                        <li class="page-item {% if i == currentPage %} active {% endif %} ">
+                            <a class="page-link" href="{{ path('clickhouse', {page: i}) }}">{{ i }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
 
+            <div class="d-flex justify-content-center my-3">
+                <form class="ml-3" action="{{ path('clickhouseDeleteAll') }}"  method="post">
+                    <button onclick="return confirm('This action will remove all rows from database, Are you sure you want to do this?')" class="btn btn-danger" type="submit">Clear table</button>
+                </form>
+            </div>
+        {% endif %}
         <table class="table">
             <thead class="thead-light">
             <tr>
