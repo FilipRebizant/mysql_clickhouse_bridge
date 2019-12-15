@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit row{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <form action="{{ path('mariaDBEditRow', {id: id}) }}" method="post">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" value="{{ name }}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" value="{{ city }}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="text" id="age" name="age" value="{{ age }}" class="form-control">
+            </div>
+            <input type="hidden" name="id" value="{{ id }}">
+            <input type="hidden" name="page" value="{{ page }}">
+            <button type="submit" class="btn btn-primary">Edit</button>
+        </form>
+    </div>
+{% endblock %}

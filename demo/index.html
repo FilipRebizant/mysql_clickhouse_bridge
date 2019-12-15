@@ -1,0 +1,132 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+		<link href="checkbox_style.css" rel="stylesheet" id="checkbox-style-css">
+
+
+		<style>
+			.tables{
+				height: 200px;
+				overflow: auto;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div class="jumbotron jumbotron-fluid">
+			<div class="container">
+			<h1 class="display-4">Total commander for database</h1>
+			<p class="lead">Lorem ipsum dolor sit amet.</p>
+				<ul class="nav justify-content-end">
+					<li class="nav-item">
+						<a class="nav-link active" href="index.html">Home</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Database structure</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="#">Action</a>
+							<a class="dropdown-item" href="#">Another action</a>
+							<a class="dropdown-item" href="#">Something else here</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#">Separated link</a>
+						</div>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="sql_statements.html">SQL Statments</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+
+		<div class="container-fluid">
+			<div class="row justify-content-md-center">
+				<div class="col-6 ">
+					<div class="card">
+						  <div class="card-body">
+								<h5 class="card-title"><a href="database_structure.html">Database name 1</a></h5>
+								<h6 class="card-subtitle mb-2 text-muted">Clickhouse</h6>
+								<hr>
+								<div class="tables">
+									<div class="chiller_cb">
+										<input id="myCheckbox" type="checkbox" >
+										<label for="myCheckbox">Table_name1</label>
+										<span></span>
+									</div>
+									<div class="chiller_cb">
+											<input id="myCheckbox2" type="checkbox" >
+											<label for="myCheckbox2">Table_name2</label>
+											<span></span>
+									</div>
+									<div class="chiller_cb">
+											<input id="myCheckbox3" type="checkbox" >
+											<label for="myCheckbox3">Table_name3</label>
+											<span></span>
+									</div>
+								</div>
+						  </div>
+					</div>
+				</div>
+				<div class="col-6 ">
+					<div class="card">
+						  <div class="card-body">
+								<h5 class="card-title"><a href="database_structure.html">Database name 2</a></h5>
+								<h6 class="card-subtitle mb-2 text-muted">MariaDB</h6>
+								<hr>
+								<div class="tables">
+									<div class="chiller_cb">
+										<input id="myCheckbox4" type="checkbox" >
+										<label for="myCheckbox4">Table_name1</label>
+										<span></span>
+									</div>
+									<div class="chiller_cb">
+											<input id="myCheckbox5" type="checkbox" >
+											<label for="myCheckbox5">Table_name2</label>
+											<span></span>
+									</div>
+									<div class="chiller_cb">
+											<input id="myCheckbox6" type="checkbox" >
+											<label for="myCheckbox6">Table_name3</label>
+											<span></span>
+									</div>
+									<div class="chiller_cb">
+											<input id="myCheckbox7" type="checkbox" >
+											<label for="myCheckbox7">Table_name4</label>
+											<span></span>
+									</div>
+									<div class="chiller_cb">
+											<input id="myCheckbox8" type="checkbox" >
+											<label for="myCheckbox8">Table_name4</label>
+											<span></span>
+									</div>
+									<div class="chiller_cb">
+											<input id="myCheckbox9" type="checkbox" >
+											<label for="myCheckbox9">Table_name4</label>
+											<span></span>
+									</div>
+									<div class="chiller_cb">
+											<input id="myCheckbox10" type="checkbox" >
+											<label for="myCheckbox10">Table_name4</label>
+											<span></span>
+									</div>
+								</div>
+						  </div>
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="row justify-content-md-center">
+					<div class="col-6">
+						<a type="button" class="btn btn-primary btn-lg btn-block" href="benchmark.html">Replace tables</a>
+					</div>
+			</div>
+		</div>
+	</body>
+</html>
