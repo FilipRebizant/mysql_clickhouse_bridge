@@ -61,13 +61,15 @@ class ClickhouseRepository extends AbstractRepository
      */
     public function edit(array $data): int
     {
+
+        //ALTER TABLE <table> UPDATE column1 = expr1 [, ...] WHERE <filter expression>
+        $age = strval($data['age']);
+
         $query = "
-        UPDATE $this->tableName 
-        SET 
-          $this->tableName.id = '$data[id]',
-          $this->tableName.Age = $data[age],
-          $this->tableName.City = '$data[city]',
-          $this->tableName.Name = '$data[name]'
+        ALTER TABLE $this->tableName UPDATE 
+          Age = $age,
+          City = '$data[city]',
+          Name = '$data[name]'
         WHERE id = $data[id]";
 
         return $this->conn->executeUpdate($query);
@@ -92,7 +94,7 @@ class ClickhouseRepository extends AbstractRepository
 
         // add columns
         $newTable->addColumn('id', 'integer', ['unsigned' => true]);
-        $newTable->addColumn('Age', 'string', ['notnull' => false]);
+        $newTable->addColumn('Age', 'integer', ['unsigned' => true]);
         $newTable->addColumn('City', 'string', ['notnull' => false]);
         $newTable->addColumn('Name', 'string', ['notnull' => false]);
 
@@ -112,7 +114,6 @@ class ClickhouseRepository extends AbstractRepository
      */
     public function delete(int $id): void
     {
-
         $query = "ALTER TABLE $this->tableName
                   DELETE WHERE id = $id
                   ";
@@ -128,14 +129,27 @@ class ClickhouseRepository extends AbstractRepository
      */
     public function deleteAll(): void
     {
-        $selectQuery = "SELECT id from $this->tableName";
-        $allRows = $this->conn->fetchAll($selectQuery);
+        //        $deleteQuery = 'DROP COLUMN IF EXISTS id, Age, Name';
+        $deleteQuery = "DROP TABLE $this->tableName";
+        $this->conn->query($deleteQuery);
+        $this->setupDatabase();
+//        die;
 
-        foreach ($allRows as $row) {
-            $deleteQuery = "ALTER TABLE $this->tableName
-                            DELETE WHERE id = $row[id]
-                            ";
-            $this->conn->query($deleteQuery);
-        }
+//        $selectQuery = "SELECT id from $this->tableName";
+//        $allRows = $this->conn->fetchAll($selectQuery);
+//
+//        foreach ($allRows as $row) {
+//            $deleteQuery = "ALTER TABLE $this->tableName
+//                            DELETE WHERE id = $row[id]
+//                            ";
+//            $this->conn->query($deleteQuery);
+//        }
+
+//            $query = "DELETE
+//                  FROM $this->tableName
+//                  WHERE id = $id";
+//
+//        $query = "CLEAR COLUMN id IN PARTITION $this->tableName";
+//        $this->conn->query($query);
     }
 }

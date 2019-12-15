@@ -49,9 +49,14 @@ class HomeController extends AbstractController
             $rows = $this->mariaDBRepository->getDataFromTables($data['columns'], $data['counter']);
 
             foreach ($rows as $row) {
-                if ($row['id']) {
+                if (array_key_exists('id', $row)) {
                     $row['id'] = (int) $row['id'];
                 }
+
+                if (array_key_exists('Age', $row)) {
+                    $row['Age'] = (int) $row['Age'];
+                }
+
                 $this->clickhouseRepository->insert($row);
             }
         }
