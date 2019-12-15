@@ -32,6 +32,8 @@ class HomeController extends AbstractController
     public function index(): Response
     {
         $columns = $this->mariaDBRepository->getColumnNames();
+        unset($columns[0]);
+        $columns = array_values($columns);
 
         return $this->render('home/index.html.twig', [
             'columns' => $columns,
@@ -65,7 +67,7 @@ class HomeController extends AbstractController
             $rows = $this->clickHouseRepository->getDataFromTables($data['columns'], $data['counter']);
 
             foreach ($rows as $row) {
-                $this->clickHouseRepository->insert($row);
+                $this->mariaDBRepository->insert($row);
             }
         }
 
