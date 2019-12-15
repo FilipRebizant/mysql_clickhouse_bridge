@@ -56,14 +56,15 @@ class HomeController extends AbstractController
             }
         }
 
-        if ($data['from' === 'clickhouse']) {
-            $rows = [];
-//            var_dump($rows);
-//            die;
-//            foreach ($rows as $row) {
-//                 $this->mariaDBRepository->insert($row); // TODO:: Sprawdzić czy dodawanie działa
-//            }
-        }
+//        if ($data['from' === 'clickhouse']) {
+////            $rows = [];
+////            var_dump($rows);
+////            die;
+////            foreach ($rows as $row) {
+////                 $this->mariaDBRepository->insert($row); // TODO:: Sprawdzić czy dodawanie działa
+////                    $this->clickhouseRepository->delete()
+////            }
+//        }
 
         return new JsonResponse([
             'rows' => $rows,

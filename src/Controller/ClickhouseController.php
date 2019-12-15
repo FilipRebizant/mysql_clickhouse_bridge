@@ -25,6 +25,8 @@ class ClickhouseController extends AbstractController
     {
         $page = $request->get('page');
         $dataSet = $this->clickhouseRepository->fetchAll($page);
+//        var_dump($dataSet);
+//            die;
 
         return $this->render('clickhouse/index.html.twig', [
             'rows' => $dataSet,
@@ -74,6 +76,18 @@ class ClickhouseController extends AbstractController
         $this->addFlash('success', 'Row Removed successfully');
 
         return $this->redirectToRoute('clickhouse', ['page' => $page]);
+    }
+
+    /**
+     * @Route("/clickhouse_delete_all/", name="clickhouseDeleteAll", methods={"POST"})
+     */
+    public function deleteAll(Request $request): Response
+    {
+        $this->clickhouseRepository->deleteAll();
+
+        $this->addFlash('success', 'Database cleared successfully');
+
+        return $this->redirectToRoute('clickhouse', ['page' => 1]);
     }
 
     /**

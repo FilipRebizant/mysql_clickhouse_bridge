@@ -105,4 +105,37 @@ class ClickhouseRepository extends AbstractRepository
             $this->conn->exec($sql);
         }
     }
+
+    /**
+     * @param int $id
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function delete(int $id): void
+    {
+
+        $query = "ALTER TABLE $this->tableName
+                  DELETE WHERE id = $id
+                  ";
+//            $query = "DELETE
+//                  FROM $this->tableName
+//                  WHERE id = $id";
+//
+        $this->conn->query($query);
+    }
+
+    /**
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function deleteAll(): void
+    {
+        $selectQuery = "SELECT id from $this->tableName";
+        $allRows = $this->conn->fetchAll($selectQuery);
+
+        foreach ($allRows as $row) {
+            $deleteQuery = "ALTER TABLE $this->tableName
+                            DELETE WHERE id = $row[id]
+                            ";
+            $this->conn->query($deleteQuery);
+        }
+    }
 }

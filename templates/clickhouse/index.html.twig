@@ -5,7 +5,7 @@
 {% block body %}
     <div class="container">
         {% for message in app.flashes('success') %}
-            <div class="alert alert-success mt-5">
+            <div class="alert text-center alert-success mt-5">
                 {{ message }}
             </div>
         {% endfor %}
@@ -20,6 +20,11 @@
                 {% endfor %}
             </ul>
         </nav>
+        <div class="d-flex justify-content-center my-3">
+            <form class="ml-3" action="{{ path('clickhouseDeleteAll') }}"  method="post">
+                <button onclick="return confirm('This action will remove all rows from database, Are you sure you want to do this?')" class="btn btn-danger" type="submit">Clear table</button>
+            </form>
+        </div>
 
         <table class="table">
             <thead class="thead-light">
@@ -28,6 +33,7 @@
                 <th>Name</th>
                 <th>Age</th>
                 <th>City</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -37,6 +43,15 @@
                     <td>{{ row['Name'] }}</td>
                     <td>{{ row['Age'] }}</td>
                     <td>{{ row['City'] }}</td>
+                    <td class="d-flex">
+                        <form action="{{ path('clickhouseEditView', {id: row['id'], page: currentPage}) }}">
+                            <input type="hidden" name="page" value="{{ currentPage }}">
+                            <button class="btn btn-primary">Edit</button>
+                        </form>
+                        <form class="ml-3" action="{{ path('clickhouseDeleteRow', {id: row['id'], page: currentPage}) }}" method="post">
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
