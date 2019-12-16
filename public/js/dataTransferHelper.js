@@ -32,8 +32,14 @@ $(document).ready(function () {
         var $spinner = $('#spinner');
 
         document.querySelectorAll('input[type=checkbox]').forEach(function(item) {
-            if (item.checked) {
-                selections = selections + item.value + ',';
+            if ($inputFrom.val() === 'clickHouse') {
+                if (item.checked && item.value !== 'id') {
+                    selections = selections + item.value + ',';
+                }
+            } else {
+                if (item.checked) {
+                    selections = selections + item.value + ',';
+                }
             }
         });
 

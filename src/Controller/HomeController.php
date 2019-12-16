@@ -32,8 +32,6 @@ class HomeController extends AbstractController
     public function index(): Response
     {
         $columns = $this->mariaDBRepository->getColumnNames();
-        unset($columns[0]);
-        $columns = array_values($columns);
 
         return $this->render('home/index.html.twig', [
             'columns' => $columns,
