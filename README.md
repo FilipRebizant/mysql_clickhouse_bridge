@@ -61,7 +61,6 @@ Celem aplikacji jest tworzenie kopii danych pomiędzy systemami bazodanowymi Mar
 ![8](documentation/uml/8.png)
 
 - ClickHouse
-![9](documentation/uml/9.png)
 ![11](documentation/uml/10.png)
 ![10](documentation/uml/11.png)
 ### Terminarz
