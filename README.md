@@ -65,7 +65,7 @@ Celem aplikacji jest tworzenie kopii danych pomiędzy systemami bazodanowymi Mar
 ![10](documentation/uml/11.png)
 ### Terminarz
   - opracowanie założeń i wymagań do: 28.10.2019
-  - opcowanie wstępnej dokumentacji do: 04.11.2019
+  - opracowanie wstępnej dokumentacji do: 04.11.2019
   - implementacja do: 25.11.2019
   - testy do: 02.12.2019
   - przygotowanie dokumentacji do: 09.12.2019
